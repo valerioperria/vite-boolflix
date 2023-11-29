@@ -1,9 +1,12 @@
 <script>
-import { store } from "../store";
+import { storeFilm } from "../store";
+import { storeSeries } from "../store";
+
 export default {
   data() {
     return {
-      store,
+        storeFilm,
+        storeSeries,
     };
   },
 };
@@ -13,8 +16,9 @@ export default {
   <div>
     <input
       type="search"
-      placeholder="cerca film"
-      v-model.trim="store.searchText"
+      placeholder="cerca film e serie"
+      v-model.trim:films="storeFilm.searchText" 
+      v-model.trim:series="storeSeries.searchText"
     />
     <button @click="$emit('performSearch')">Cerca</button>
   </div>

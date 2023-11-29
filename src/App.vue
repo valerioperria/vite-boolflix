@@ -1,34 +1,50 @@
 <script>
 import axios from "axios";
-import { store } from "./store";
+import { storeFilm } from "./store";
+import { storeSeries } from "./store";
 import AppSearch from "./components/Appsearch.vue";
 import AppFilmList from "./components/AppFilmList.vue";
+import AppSeriesList from "./components/AppSeriesList.vue"
 
 export default {
   data() {
     return {
-      store,
+      storeFilm,
+      storeSeries,
     };
   },
   created() {
-    axios.get(this.store.apiUrl).then((resp) => {
-      this.store.films = resp.data.results;
+    axios.get(this.storeFilm.apiUrlFilm).then((resp) => {
+      this.storeFilm.films = resp.data.results;
+    });
+    axios.get(this.storeSeries.apiUrlSeries).then((resp) => {
+      this.storeSeries.series = resp.data.results;
     });
   },
 
-  components: { AppSearch, AppFilmList },
+  components: { AppSearch, AppFilmList, AppSeriesList},
 
   methods: {
     movieSearch() {
       console.log("Cerca");
       axios
-        .get(this.store.apiUrl, {
+        .get(this.storeFilm.apiUrlFilm, {
           params: {
-            query: this.store.searchText,
+            query: this.storeFilm.searchText,
           },
         })
         .then((resp) => {
-          this.store.films = resp.data.results;
+          this.storeFilm.films = resp.data.results;
+        });
+
+        axios
+        .get(this.storeSeries.apiUrlSeries, {
+          params: {
+            query: this.storeSeries.searchText,
+          },
+        })
+        .then((resp) => {
+          this.storeSeries.series = resp.data.results;
         });
     },
   },
@@ -37,7 +53,10 @@ export default {
 
 <template>
   <AppSearch @performSearch="movieSearch" />
+  <h1>FILM</h1>
   <AppFilmList />
+  <h2>TV SERIES </h2>
+  <AppSeriesList/>
 </template>
 
 <style lang="scss">

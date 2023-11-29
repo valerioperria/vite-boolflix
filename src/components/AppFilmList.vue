@@ -1,12 +1,12 @@
 <script>
-import { store } from "../store";
+import { storeFilm } from "../store";
 import AppFilmCard from "./AppFilmCard.vue";
 
 
 export default {
     data() {
         return {
-            store,
+            storeFilm,
         };
     },
     components: { AppFilmCard },
@@ -14,7 +14,7 @@ export default {
 </script>
 
 <template>
-    <div v-for="film in store.films" :key="film.id">
+    <div v-for="film in storeFilm.films" :key="film.id">
         <AppFilmCard :film="film" />
     </div>
 </template>
