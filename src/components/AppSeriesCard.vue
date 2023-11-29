@@ -35,6 +35,10 @@ export default {
         </div>
 
         <p>{{ serie.vote_average }}</p>
+
+        <div>
+            <img :src="`https://image.tmdb.org/t/p/w342/${serie.poster_path} `" alt="">
+        </div>
     </div>
 </template>
 
