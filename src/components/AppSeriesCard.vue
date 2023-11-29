@@ -34,7 +34,7 @@ export default {
             <p>{{ serie.original_language }}</p>
         </div>
 
-        <p>{{ serie.vote_average }}</p>
+        <p>{{(Math.round(serie.vote_average / 2))}}</p>
 
         <div>
             <img :src="`https://image.tmdb.org/t/p/w342/${serie.poster_path} `" alt="">

@@ -6,7 +6,7 @@ export default {
     methonds: {
 
     }
-}
+};
 </script>
 
 <template>
@@ -34,7 +34,8 @@ export default {
             <p>{{ film.original_language }}</p>
         </div>
 
-        <p>{{ film.vote_average }}</p>
+        <p>{{(Math.round(film.vote_average / 2))}}</p>
+        
 
         <div>
             <img :src="`https://image.tmdb.org/t/p/w342/${film.poster_path}`" alt="">
