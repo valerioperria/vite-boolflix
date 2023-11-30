@@ -72,14 +72,14 @@ export default {
 @use "./style/general.scss";
 @import "@fortawesome/fontawesome-free/css/all.css";
 
-
 .container {
-
   width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: rgb(64, 63, 63);
+  overflow: auto;
 
   header {
     display: flex;
