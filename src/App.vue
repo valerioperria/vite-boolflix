@@ -2,9 +2,9 @@
 import axios from "axios";
 import { storeFilm } from "./store";
 import { storeSeries } from "./store";
-import AppSearch from "./components/Appsearch.vue";
+import AppSearch from "./components/AppSearch.vue";
 import AppFilmList from "./components/AppFilmList.vue";
-import AppSeriesList from "./components/AppSeriesList.vue"
+import AppSeriesList from "./components/AppSeriesList.vue";
 
 export default {
   data() {
@@ -22,7 +22,7 @@ export default {
     });
   },
 
-  components: { AppSearch, AppFilmList, AppSeriesList},
+  components: { AppSearch, AppFilmList, AppSeriesList },
 
   methods: {
     movieSearch() {
@@ -37,7 +37,7 @@ export default {
           this.storeFilm.films = resp.data.results;
         });
 
-        axios
+      axios
         .get(this.storeSeries.apiUrlSeries, {
           params: {
             query: this.storeSeries.searchText,
@@ -52,13 +52,56 @@ export default {
 </script>
 
 <template>
-  <AppSearch @performSearch="movieSearch" />
-  <h1>FILM</h1>
-  <AppFilmList />
-  <h2>TV SERIES </h2>
-  <AppSeriesList/>
+  <div class="container">
+    <header>
+      <h1>BOOLFLIX</h1>
+      <AppSearch @performSearch="movieSearch" />
+    </header>
+    <main>
+      <section class="film">
+        <AppFilmList />
+      </section>
+      <section class="series">
+        <AppSeriesList />
+      </section>
+    </main>
+  </div>
 </template>
 
 <style lang="scss">
-@use "./style/general.scss"
+@use "./style/general.scss";
+@import "@fortawesome/fontawesome-free/css/all.css";
+
+
+.container {
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(64, 63, 63);
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    background-color: black;
+    width: 100%;
+
+    h1 {
+      color: crimson;
+    }
+  }
+
+  main {
+    padding: 1rem;
+
+    .film,
+    .series {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+}
 </style>
