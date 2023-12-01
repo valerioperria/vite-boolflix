@@ -44,21 +44,23 @@ export default {
         </div>
 
         <div class="poster">
-            <img :src="`https://image.tmdb.org/t/p/w342/${serie.poster_path}`" alt="">
+            <h3 v-if="serie.poster_path === null">The Image is not Available</h3>
+            <img v-else :src="`https://image.tmdb.org/t/p/w342/${serie.poster_path}`" alt="">
         </div>
+
     </div>
 </template>
 
 <style lang="scss" scoped>
 .card {
     width: 342px;
-    height: 520px;
-    background-color: black;
+    height: 510px;
     margin: 0 1rem 1rem 0;
 
     .details {
         display: none;
         color: white;
+        background-color: black;
         padding: 1rem;
         width: 100%;
         height: 100%;
@@ -78,6 +80,17 @@ export default {
 
     .poster {
         display: block;
+        background-color:  rgb(64, 63, 63);;
+
+        h3 {
+            color: white;
+            text-align: center;
+            padding-top: 8rem;
+        }
+       img{
+        width: 342px;
+        height: 510px
+       };
     }
 
     &:hover {
