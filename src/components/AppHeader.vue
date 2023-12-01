@@ -9,6 +9,7 @@ export default {
       storeSeries,
     };
   },
+  emits: ["performSearch"]
 };
 </script>
 
