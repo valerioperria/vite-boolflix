@@ -2,7 +2,7 @@
 import axios from "axios";
 import { storeFilm } from "./store";
 import { storeSeries } from "./store";
-import AppSearch from "./components/AppSearch.vue";
+import AppHeader from "./components/AppHeader.vue";
 import AppFilmList from "./components/AppFilmList.vue";
 import AppSeriesList from "./components/AppSeriesList.vue";
 
@@ -22,7 +22,7 @@ export default {
     });
   },
 
-  components: { AppSearch, AppFilmList, AppSeriesList },
+  components: { AppHeader, AppFilmList, AppSeriesList },
 
   methods: {
     movieSearch() {
@@ -53,10 +53,7 @@ export default {
 
 <template>
   <div class="container">
-    <header>
-      <h1>BOOLFLIX</h1>
-      <AppSearch @performSearch="movieSearch" />
-    </header>
+    <AppHeader @performSearch="movieSearch" />
     <main>
       <section class="film">
         <AppFilmList />
@@ -80,19 +77,6 @@ export default {
   align-items: center;
   background-color: rgb(64, 63, 63);
   overflow: auto;
-
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2rem;
-    background-color: black;
-    width: 100%;
-
-    h1 {
-      color: crimson;
-    }
-  }
 
   main {
     padding: 1rem;
