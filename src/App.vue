@@ -1,50 +1,63 @@
 <script>
 import axios from "axios";
-import { storeFilm } from "./store";
-import { storeSeries } from "./store";
+import { store } from "./store"
+// import { storeFilm } from "./store";
+// import { storeSeries } from "./store";
 import AppHeader from "./components/AppHeader.vue";
-import AppFilmList from "./components/AppFilmList.vue";
-import AppSeriesList from "./components/AppSeriesList.vue";
+// import AppFilmList from "./components/AppFilmList.vue";
+// import AppSeriesList from "./components/AppSeriesList.vue";
+import AppList from "./components/AppList.vue";
 
 export default {
   data() {
     return {
-      storeFilm,
-      storeSeries,
+      // storeFilm,
+      // storeSeries,
+      store,
     };
   },
-  created() {
-    axios.get(this.storeFilm.apiUrlFilm).then((resp) => {
-      this.storeFilm.films = resp.data.results;
-    });
-    axios.get(this.storeSeries.apiUrlSeries).then((resp) => {
-      this.storeSeries.series = resp.data.results;
-    });
-  },
 
-  components: { AppHeader, AppFilmList, AppSeriesList },
+  components: { AppHeader, AppList },
 
   methods: {
-    movieSearch() {
-      console.log("Cerca");
+    // movieSearch() {
+    //   console.log("Cerca");
+    //   axios
+    //     .get(this.storeFilm.apiUrlFilm, {
+    //       params: {
+    //         query: this.storeFilm.searchText,
+    //       },
+    //     })
+    //     .then((resp) => {
+    //       this.storeFilm.films = resp.data.results;
+    //     });
+
+    //   axios
+    //     .get(this.storeSeries.apiUrlSeries, {
+    //       params: {
+    //         query: this.storeSeries.searchText,
+    //       },
+    //     })
+    //     .then((resp) => {
+    //       this.storeSeries.series = resp.data.results;
+    //     });
+    // },
+    search() {
+      const params = {
+        api_key: this.store.apiKey,
+        query: this.store.searchText,
+      };
+
       axios
-        .get(this.storeFilm.apiUrlFilm, {
-          params: {
-            query: this.storeFilm.searchText,
-          },
-        })
+        .get(`${this.store.baseApiurl}/search/movie`, { params })
         .then((resp) => {
-          this.storeFilm.films = resp.data.results;
+          this.store.films = resp.data.results;
         });
 
       axios
-        .get(this.storeSeries.apiUrlSeries, {
-          params: {
-            query: this.storeSeries.searchText,
-          },
-        })
+        .get(`${this.store.baseApiurl}/search/tv`, { params })
         .then((resp) => {
-          this.storeSeries.series = resp.data.results;
+          this.store.series = resp.data.results;
         });
     },
   },
@@ -53,15 +66,22 @@ export default {
 
 <template>
   <div class="container">
-    <AppHeader @performSearch="movieSearch" />
+    <header>
+      <AppHeader @performSearch="search" />
+    </header>
+
     <main>
+      <AppList />
+    </main>
+
+    <!-- <main>
       <section class="film">
         <AppFilmList />
       </section>
       <section class="series">
         <AppSeriesList />
       </section>
-    </main>
+    </main> -->
   </div>
 </template>
 
@@ -78,14 +98,12 @@ export default {
   background-color: rgb(64, 63, 63);
   overflow: auto;
 
+  header {
+    width: 100%;
+  }
+
   main {
     padding: 1rem;
-
-    .film,
-    .series {
-      display: flex;
-      flex-wrap: wrap;
-    }
   }
 }
 </style>

@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 import { storeFilm } from "../store";
 import AppFilmCard from "./AppFilmCard.vue";
 
@@ -19,4 +19,4 @@ export default {
     </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped></style> -->

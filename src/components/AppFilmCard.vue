@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 export default {
     props: {
         film: Object,
@@ -103,4 +103,4 @@ export default {
         }
     }
 }
-</style>
+</style> -->
